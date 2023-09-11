@@ -29,12 +29,10 @@ class MapViewController: BaseViewController, MapViewControllerComposition {
             .foregroundColor : UIColor.FlatUI.clouds,
             .font : UIFont.preferredFont(forTextStyle: .headline)
         ], for: .normal)
-        
         sc.selectedSegmentTintColor = .FlatUI.peterRiver
         sc.backgroundColor = .FlatUI.wetAsphalt
         sc.layer.borderColor = UIColor.FlatUI.wetAsphalt.cgColor
         sc.layer.borderWidth = 5.0
-        
         sc.addTarget(self, action: #selector(clearAndUpdateAnnotationsForVisibleRegion), for: .valueChanged)
         return sc
     }()
@@ -43,12 +41,12 @@ class MapViewController: BaseViewController, MapViewControllerComposition {
 // MARK: - LifeCycle Events
 
 extension MapViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupConstraints()
@@ -67,7 +65,6 @@ extension MapViewController {
     
     func setupConstraints() {
         mapView.constrain(withinView: view)
-        
         segmentedControl.activateConstraints([
             segmentedControl.topAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.topAnchor, constant: 16.0),
             segmentedControl.trailingAnchor.constraint(equalTo: mapView.trailingAnchor,  constant: -16.0)

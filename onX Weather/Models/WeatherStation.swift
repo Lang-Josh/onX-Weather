@@ -44,22 +44,22 @@ extension WeatherStation {
         switch true {
         case temp > 75.0:
             return .Icons.hot.imageAsset
-        
+            
         case temp < 30.0:
             return .Icons.snow.imageAsset
-        
+            
         case temp < 50.0:
             return .Icons.chilly.imageAsset
-        
+            
         case chanceOfPrecipitation > 50 && windSpeed > 10.0:
             return .Icons.storm.imageAsset
-        
+            
         case chanceOfPrecipitation > 50:
             return .Icons.rain.imageAsset
-        
+            
         case windSpeed > 10.0:
             return .Icons.windy.imageAsset
-        
+            
         default:
             return .Icons.sunny.imageAsset
         }
