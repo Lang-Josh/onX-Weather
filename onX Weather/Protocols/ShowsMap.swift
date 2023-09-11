@@ -6,6 +6,7 @@ protocol ShowsMap: MKMapViewDelegate {
     var locationHandler: LocationHandler { get }
     
     func resetMap()
+    func updateAnnotations()
 }
 
 extension ShowsMap {

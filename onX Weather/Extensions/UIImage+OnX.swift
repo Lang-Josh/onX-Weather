@@ -2,22 +2,12 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    static let defaultIconSize = CGSize(width: 40, height: 40)
     
     enum Icons: String {
-        case chilly
-        case hot
-        case rain
-        case snow
-        case storm
-        case sunny
-        case windy
-        
-        var asset: UIImage? {
-            guard
-                let image = UIImage(named: self.rawValue)
-            else { return nil }
-            let imageSize = CGSize(width: 70, height: 70)
-            return image.preparingThumbnail(of: imageSize)
+        case chilly, hot, rain, snow, storm, sunny, windy
+        var imageAsset: UIImage? {
+            UIImage(named: rawValue)?.preparingThumbnail(of: UIImage.defaultIconSize)
         }
     }
 }

@@ -2,13 +2,14 @@ import UIKit
 
 extension UIView {
     
-    /// Creates an instance of `Self` and sets its `translatesAutoresizingMaskIntoConstraints` to false before
-    /// returning the new instance to the caller.
+    /// Creates an instance of `Self` and sets its `translatesAutoresizingMaskIntoConstraints` to false
+    ///  and `accessibilityIdentifier` to it's `className` before returning the new instance to the caller.
     ///
     /// - Returns: A new instance of `Self.`
     class func autolayout() -> Self {
         let view = Self()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = view.className
         return view
     }
     

@@ -1,29 +1,40 @@
 import UIKit
 import MapKit
 
-class MapViewController: BaseViewController, ShowsWeatherData {
+class MapViewController: BaseViewController, MapViewControllerComposition {
     
-    internal let apiHandler = APIHandler()
-    internal var locationHandler = LocationHandler()
     var weatherStations: [WeatherStation] = []
-    
+    internal var selectedAnnotationView: WeatherStationAnnotationView? = nil // TODO: Present Callout
+    internal var apiHandler = APIHandler()
+    internal var locationHandler = LocationHandler()
+    internal var annotationViews: [WeatherStationAnnotationView] {
+        mapView.annotations.compactMap {
+            mapView.view(for: $0) as? WeatherStationAnnotationView
+        }
+    }
     internal lazy var mapView: MKMapView = {
         let map: MKMapView = MKMapView.autolayout()
         map.delegate = self
-        map.register(annotationViewWithClass: MKMarkerAnnotationView.self)
         map.isRotateEnabled = false
+        map.showsScale = true
+        map.showsUserLocation = false
+        map.register(annotationViewWithClass: WeatherStationAnnotationView.self)
         return map
     }()
-    
-    private lazy var segmentedControl: UISegmentedControl = {
+    internal lazy var segmentedControl: UISegmentedControl = {
         let sc: UISegmentedControl = UISegmentedControl.autolayout()
         sc.segmentTitles = ["TODAY", "TOMORROW"]
         sc.selectedSegmentIndex = 0
         sc.setTitleTextAttributes([
-            .foregroundColor : UIColor.FlatUI.clouds
+            .foregroundColor : UIColor.FlatUI.clouds,
+            .font : UIFont.preferredFont(forTextStyle: .headline)
         ], for: .normal)
-        sc.selectedSegmentTintColor = .FlatUI.flatOrange
-        sc.backgroundColor = .FlatUI.emerald
+        
+        sc.selectedSegmentTintColor = .FlatUI.peterRiver
+        sc.backgroundColor = .FlatUI.wetAsphalt
+        sc.layer.borderColor = UIColor.FlatUI.wetAsphalt.cgColor
+        sc.layer.borderWidth = 5.0
+        
         sc.addTarget(self, action: #selector(clearAndUpdateAnnotationsForVisibleRegion), for: .valueChanged)
         return sc
     }()
@@ -35,23 +46,32 @@ extension MapViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.addSubview(mapView)
-        mapView.addSubview(segmentedControl)
+        setupView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setupConstraints()
+        resetMap()
+    }
+}
+
+// MARK: - Setup
+
+extension MapViewController {
+    
+    func setupView() {
+        view.addSubview(mapView)
+        mapView.addSubview(segmentedControl)
+    }
+    
+    func setupConstraints() {
         mapView.constrain(withinView: view)
         
         segmentedControl.activateConstraints([
-            segmentedControl.topAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.topAnchor, constant: 15.0),
-            segmentedControl.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -15.0)
+            segmentedControl.topAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.topAnchor, constant: 16.0),
+            segmentedControl.trailingAnchor.constraint(equalTo: mapView.trailingAnchor,  constant: -16.0)
         ])
-        
-        resetMap()
-        clearAndUpdateAnnotationsForVisibleRegion()
     }
 }
 
@@ -59,34 +79,32 @@ extension MapViewController {
 
 extension MapViewController {
     
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // FIXME: Handle taps
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         clearAndUpdateAnnotationsForVisibleRegion()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation { return nil }
-        
-        var annotationView = mapView.dequeueReusableAnnotationView(withClass: MKMarkerAnnotationView.self, for: annotation)
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MKMarkerAnnotationView")
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-        let image = (annotation as? WeatherStation)?.annotationGlyphImage
-        annotationView?.glyphImage = image
-        annotationView?.selectedGlyphImage = image
-        annotationView?.canShowCallout = true
-        annotationView?.markerTintColor = .clear
-        annotationView?.animatesWhenAdded = false
-
+        let annotationView = WeatherStationAnnotationView(annotation: annotation, reuseIdentifier: "WeatherStationAnnotationView")
+        annotationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pinTapped(_:))))
         return annotationView
+    }
+    
+    @objc func pinTapped(_ sender: UITapGestureRecognizer) {
+        guard let annotationView = sender.view as? WeatherStationAnnotationView else { return }
+        selectedAnnotationView = selectedAnnotationView === annotationView ? nil : annotationView
     }
 }
 
+// MARK: - Update Annotations
+
 extension MapViewController {
     
-    private func updateAnnotations() {
+    internal func updateAnnotations() {
         weatherStations.forEach {
             if mapView.visibleMapRect.contains($0.mapPoint) {
                 mapView.addAnnotation($0)
@@ -98,15 +116,11 @@ extension MapViewController {
         mapView.removeAnnotations(mapView.annotations)
         
         switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            refreshTodaysWeatherData()
-        case 1:
-            refreshTomorrowssWeatherData()
-        default:
-            return
+        case 0:     refreshTodaysWeatherData()
+        case 1:     refreshTomorrowssWeatherData()
+        default:    break
         }
         
         updateAnnotations()
     }
 }
-
