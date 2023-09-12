@@ -38,6 +38,7 @@
 		C06C34A72AAF6EE300019187 /* WeatherStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C34A62AAF6EE300019187 /* WeatherStationAnnotationView.swift */; };
 		C06C34AA2AAF814900019187 /* MapViewControllerComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C34A92AAF814900019187 /* MapViewControllerComposition.swift */; };
 		C06C34AC2AAF85A200019187 /* BouncesWhenPresented.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C34AB2AAF85A200019187 /* BouncesWhenPresented.swift */; };
+		C0D679922AB0249E00DB72E0 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D679912AB0249E00DB72E0 /* CustomCalloutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		C06C34A62AAF6EE300019187 /* WeatherStationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStationAnnotationView.swift; sourceTree = "<group>"; };
 		C06C34A92AAF814900019187 /* MapViewControllerComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerComposition.swift; sourceTree = "<group>"; };
 		C06C34AB2AAF85A200019187 /* BouncesWhenPresented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncesWhenPresented.swift; sourceTree = "<group>"; };
+		C0D679912AB0249E00DB72E0 /* CustomCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				C06C34A62AAF6EE300019187 /* WeatherStationAnnotationView.swift */,
+				C0D679912AB0249E00DB72E0 /* CustomCalloutView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				C05F3B9C2AAE8A850081FD06 /* LocationHandler.swift in Sources */,
 				C05F3B9A2AAE8A850081FD06 /* ShowsWeatherData.swift in Sources */,
 				C06C34A72AAF6EE300019187 /* WeatherStationAnnotationView.swift in Sources */,
+				C0D679922AB0249E00DB72E0 /* CustomCalloutView.swift in Sources */,
 				C05F3B8D2AAE8A850081FD06 /* UIColor+OnX.swift in Sources */,
 				C05F3B9B2AAE8A850081FD06 /* ShowsMap.swift in Sources */,
 				C05F3B902AAE8A850081FD06 /* UIView+OnX.swift in Sources */,

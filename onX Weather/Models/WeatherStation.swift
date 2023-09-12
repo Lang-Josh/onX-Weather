@@ -24,7 +24,7 @@ extension WeatherStation: MKAnnotation {
     }
     var subtitle: String? {
         guard let temp = temperature?.rounded(toPlaces: 1) else { return nil }
-        return "\(temp)℉"
+        return "\(temp)℉ Location: \(longitude), \(latitude)"
     }
     
     var mapPoint: MKMapPoint {

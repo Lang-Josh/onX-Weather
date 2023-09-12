@@ -7,49 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A55753B5-E704-4044-B1E8-D1BAA5ED957C"
+            uuid = "DCA05D59-7514-435C-B063-4DF00F8FE287"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "onX Weather/Models/WeatherStation.swift"
+            filePath = "onX Weather/Views/WeatherStationAnnotationView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "annotationImage"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "A55753B5-E704-4044-B1E8-D1BAA5ED957C - 5bf62b34b5b11c5a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "onX_Weather.WeatherStation.annotationGlyphImage.getter : Swift.Optional&lt;onX_Weather.OriginalUIImage&gt;"
-                  moduleName = "onX Weather"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joshlang/Development/onX%20Weather/onX%20Weather/Models/WeatherStation.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "344">
-               </Location>
-               <Location
-                  uuid = "A55753B5-E704-4044-B1E8-D1BAA5ED957C - 4421d19e999c6793"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "onX_Weather.WeatherStation.annotationImage.getter : Swift.Optional&lt;__C.UIImage&gt;"
-                  moduleName = "onX Weather"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/joshlang/Development/onX%20Weather/onX%20Weather/Models/WeatherStation.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "340">
-               </Location>
-            </Locations>
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "setSelected(_:animated:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

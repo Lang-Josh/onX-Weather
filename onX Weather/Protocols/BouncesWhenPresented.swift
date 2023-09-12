@@ -11,7 +11,7 @@ extension BouncesWhenPresented {
     
     internal var bounceAnimation: CAKeyframeAnimation {
         let animation = CAKeyframeAnimation(keyPath: "transform.scale")
-        animation.duration = 0.6
+        animation.duration = 0.75
         animation.values = [0.05, 1.25, 0.8, 1.1, 0.9, 1.0]
         animation.timingFunctions = [
             timingFunctionEaseInEaseOut,
