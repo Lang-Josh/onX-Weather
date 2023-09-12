@@ -1,7 +1,6 @@
 import Foundation
 
 extension Double {
-    
     /// SwifterSwift: Rounds the double to decimal places value
     ///
     ///   ````

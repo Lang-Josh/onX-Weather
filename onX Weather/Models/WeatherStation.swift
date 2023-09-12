@@ -24,7 +24,7 @@ extension WeatherStation: MKAnnotation {
     }
     var subtitle: String? {
         guard let temp = temperature?.rounded(toPlaces: 1) else { return nil }
-        return "\(temp)℉"
+        return "\(temp)℉ Location: \(longitude), \(latitude)"
     }
     
     var mapPoint: MKMapPoint {
@@ -32,23 +32,36 @@ extension WeatherStation: MKAnnotation {
     }
 }
 
-// MARK: - Glyph Image Business Logic
+// MARK: - Image Business Logic
 
 extension WeatherStation {
-    
-    var annotationGlyphImage: OriginalUIImage? {
+    /// This is my own business logic. It doesn't have tp make perfect sense.
+    /// It is more important to get the idea of what it is doing.
+    var annotationImage: UIImage? {
         let temp = temperature ?? .zero
         let windSpeed = windSpeed ?? .zero
         
         switch true {
-        case temp > 75.0:                   return OriginalUIImage(image: .Icons.hot.asset)
-        case temp < 30.0:                   return OriginalUIImage(image: .Icons.snow.asset)
-        case temp < 50.0:                   return OriginalUIImage(image: .Icons.chilly.asset)
+        case temp > 75.0:
+            return .Icons.hot.imageAsset
+            
+        case temp < 30.0:
+            return .Icons.snow.imageAsset
+            
+        case temp < 50.0:
+            return .Icons.chilly.imageAsset
+            
         case chanceOfPrecipitation > 50 && windSpeed > 10.0:
-                                            return OriginalUIImage(image: .Icons.storm.asset)
-        case chanceOfPrecipitation > 50:    return OriginalUIImage(image: .Icons.rain.asset)
-        case windSpeed > 10.0:              return OriginalUIImage(image: .Icons.windy.asset)
-        default:                            return OriginalUIImage(image: .Icons.sunny.asset)
+            return .Icons.storm.imageAsset
+            
+        case chanceOfPrecipitation > 50:
+            return .Icons.rain.imageAsset
+            
+        case windSpeed > 10.0:
+            return .Icons.windy.imageAsset
+            
+        default:
+            return .Icons.sunny.imageAsset
         }
     }
 }

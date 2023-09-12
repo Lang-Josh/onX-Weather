@@ -1,4 +1,3 @@
-import Foundation
 import CoreLocation
 import MapKit
 
@@ -10,17 +9,19 @@ class LocationHandler {
         static let startingLongitudeComponents: [GeographicalCoordinateSystem.Components] = [.degrees(-108.0), .minutes(5.0), .seconds(43.8)]
     }
     
-    private var startingLatitude: Double {
-        GeographicalCoordinateSystem(components: Constants.startingLatitudeComponents).decimalNotation()
+    var startingCoordinateSpan: MKCoordinateSpan {
+        MKCoordinateSpan(latitudeDelta: Constants.latitudeDefaultDeltaValue, longitudeDelta: Constants.longitudeDefaultDeltaValue)
     }
-    private var startingLongitude: Double {
-        GeographicalCoordinateSystem(components: Constants.startingLongitudeComponents).decimalNotation()
-    }
+    
     var startingLocation: CLLocation {
         CLLocation(latitude: startingLatitude, longitude: startingLongitude)
     }
-    var startingCoordinateSpan: MKCoordinateSpan {
-        MKCoordinateSpan(latitudeDelta: Constants.latitudeDefaultDeltaValue,
-                         longitudeDelta: Constants.longitudeDefaultDeltaValue)
+    
+    private var startingLatitude: Double {
+        GeographicalCoordinateSystem(components: Constants.startingLatitudeComponents).decimalNotation()
+    }
+    
+    private var startingLongitude: Double {
+        GeographicalCoordinateSystem(components: Constants.startingLongitudeComponents).decimalNotation()
     }
 }
